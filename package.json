@@ -1,0 +1,18 @@
+{
+  "name": "bogart",
+  "version": "1.0.0",
+  "description": "2017 Oscar Prediction Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Manton",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "mailgun-js": "^0.7.7",
+    "mysql": "^2.10.1"
+  }
+}

@@ -1,0 +1,52 @@
+<div id="preds" class="medium-12 medium-centered columns">
+  <h3>Predictions for {{ user.name }}</h3>
+  {{#if expired }}
+  <div class="alert callout small" data-closable>
+    <p>The deadline has now been reached. You can no longer edit your predictions. You can see the scores <a href="/results">here</a> as the award results come in.</p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {{ else }}
+  <div>
+    <p>Click on a category to make or edit your prediction for that category. Your prediction will be automatically saved. The number in the title bar shows the number of points each category is worth.</p>
+  </div>
+  {{/if }}
+  
+  <div id="head" data-uid="{{ user.id }}"></div>
+  
+  <section class="row titles">
+    {{#each data }}
+    <div class="category">
+      <a data-open="cat{{ this.id }}">
+        <div class="cat-head {{#if this.pred.image }}picked{{/if}}">
+          <span class="cat-name">{{ this.category }}</span>
+          <span title="{{ this.weight }} points" class="pts">{{ this.weight }}</span>
+        </div>
+        {{#if this.pred.image }}
+        <div class="poster">
+          <img class="pick-img" title="{{ this.pred.name }}{{#if this.pred.film }} &#10;({{ this.pred.film }}){{/if }}" src="/img/{{ this.pred.image }}.jpg" alt="{{ this.pred.name }} poster">
+        </div>
+        {{ else }}
+        <div class="poster">
+          <img class="pick-img" src="" alt="">
+        </div>
+        {{/if }}
+      </a>
+      {{#unless ../expired }}
+      <div data-cat="{{ this.id }}" id="cat{{ this.id }}" class="noms reveal large" data-reveal data-animation-in="hinge-in-from-top" data-animation-out="hinge-out-from-top">
+        <h4>Best {{ this.category }} - {{ this.weight }} points</h4>
+        {{#each this.noms }}
+        <div data-close class="rev-nom" data-nom="{{ this.id }}">
+          <img class="{{#if this.pred }}picked{{/if}}" src="/img/{{ this.image }}.jpg" title="{{ this.name }}{{#if this.film }} &#10;({{ this.film }}){{/if }}" alt="{{ this.name }} poster">
+          <div class="rev-title">{{ this.name }}</div>
+        </div>
+        {{/each }}
+      </div>
+      {{/unless }}
+    </div>
+    {{/each }}    
+  </section>
+
+</div>
+
