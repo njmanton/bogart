@@ -11,7 +11,7 @@ var express = require('express'),
     pkg = require('./package.json'),
     config = require('./config/config'),
     bp = require('body-parser'),
-    moment = require('./node_modules/sequelize/node_modules/moment'),
+    moment = require('moment'),
     bars = require('express-handlebars');
 
 app.engine('.hbs', bars({
