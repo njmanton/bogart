@@ -14,7 +14,7 @@ exports.send = function(recipient, email, code, done) {
     from    : 'Oscar Preds <admin@lcssl.org>',
     to      : email,
     bcc     : 'njmanton@gmail.com',
-    subject : 'Your Oscar Predictions code',
+    subject : 'Your 20 Year Oscar Hell code',
     text    : msg
   };
 

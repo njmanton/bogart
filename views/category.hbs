@@ -1,11 +1,11 @@
 <div class="small-12 columns">
   <h3 data-cat="{{ film.cid }}">Best {{ film.category }} {{#if film.winner }}- {{ film.winner }}{{/if }}</h3>
-  <div class="small-12 medium-3 columns">
+  
   {{#if film.winner }}
+  <div class="small-12 medium-3 columns">
     <img src="/img/{{ film.image }}.jpg" alt="{{ film.winner }} Poster">
-  {{/if }}
   </div>
-
+  
   <div class="small-12 medium-9 columns">
     <table id="category">
       <thead>
@@ -25,6 +25,10 @@
       </tbody>
     </table>
   </div>
+  {{ else }}
+  <h4><em>No winner announced yet</em></h4>
+  {{/if }}
+
 
 </div>
 

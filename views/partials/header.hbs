@@ -1,4 +1,4 @@
-<div id="errors">
+<div id="errors columns row">
   {{#if error }}
   <div class="callout small alert" data-closable>
     <p>Sorry, couldn't find that record. The error was: {{ error }}. Please check and try entering it again.</p>
@@ -19,7 +19,7 @@
 
   {{#if signup.code }}
   <div class="callout small success" data-closable>
-    <p>Signup successful! Your code is <strong>{{ signup.code }}</strong>. Use this to make your predictions at <a href="/player/{{ signup.code }}">http://oscars.mantonbradbury.com/player/{{ signup.code }}</a>. You will also receive a copy of the code by email.</p>
+    <p>Signup successful! Your code is <strong>{{ signup.code }}</strong>. Use this to make your predictions at <a href="/player/{{ signup.code }}">http://oscars.mantonbradbury.com/player/{{ signup.code }}</a>.<br /> You will also receive a copy of the code by email.</p>
     <button class="close-button" aria-label="dismiss alert" type="button" data-close>
       <span aria-hidden="true">&times;</span>
     </button>
@@ -27,16 +27,8 @@
   {{/if}}
 </div>
 
-<header class="small-12 columns">
-  <div class="small-8 columns">
-    <h2>MY 20-YEAR OSCAR HELL PRESENTS&hellip;</h2>
-    <p>The third annual prediction game for the Academy Awards. Choose who you think will win in each of the 24 main categories, to be announced at the 88th Academy Awards, on February 28.</p>
-    {{#if expired }}
-    <p>We've now reached the deadline. You can no longer sign up or make predictions, but <a href="/results">results</a> will be available as awards are made.</p>
-    {{/if }}
-  </div>
-  <div class="small-4 columns">
-    <a href="/" title="HOME"><img style="float: right;" src="/img/statuette.png" alt="Statuette"></a>
-  </div>
+<header class="small-12 row columns">
+  <div>
+    <h2>WELCOME TO THE 4<small>TH</small> ANNUAL MY...</h2>
   </div>
 </header>

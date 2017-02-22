@@ -1,5 +1,5 @@
 /******************************************************************************
-index.js
+server.js
 
 main entry point for app
 
@@ -11,6 +11,7 @@ var express = require('express'),
     pkg = require('./package.json'),
     config = require('./config/config'),
     bp = require('body-parser'),
+    moment = require('./node_modules/sequelize/node_modules/moment'),
     bars = require('express-handlebars');
 
 app.engine('.hbs', bars({
@@ -28,18 +29,19 @@ app.locals.env = config.env;
 app.locals.ver = pkg.version;
 app.locals.app = pkg.name;
 app.locals.expired = config.expired;
+app.locals.deadline = moment(config.deadline).format('MMM D');
 app.set('port', process.env.PORT || 1951); // a good year for bogart
 
 // pull in the different routes
 require('./routes')(app);
 
 // start the server
-db.conn(function(err) {
+db.conn( err => {
   if (err) {
     console.log('Can\'t connect to MySQL');
   } else {
     app.listen(app.get('port'), () => {
-      console.log('bogart running on port:', app.get('port'));
+      console.log(pkg.name, 'running on port:', app.get('port'));
     })
   }
 })

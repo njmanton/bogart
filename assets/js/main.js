@@ -75,7 +75,7 @@ $(document).ready(function() {
           $('#username-not-valid')
             .addClass('err')
             .removeClass('success')
-            .text('taken')
+            .html('taken &#128542;')
             .show();
         }
         checkForm();
@@ -134,6 +134,8 @@ $(document).ready(function() {
   $('.rev-nom').on('click', function() {
     var _this = $(this),
         img   = _this.find('img'),
+        name  = _this.data('name'),
+        film  = _this.data('film'),
         imgs  = _this.parent().find('img');
     imgs.removeClass('picked');
     img.addClass('picked');
@@ -151,7 +153,9 @@ $(document).ready(function() {
         // the prediction has been saved so change the outer poster image to match the pick
         var target = _this.parent().parent().find('.poster > img'),
             head = _this.parent().parent().find('.cat-head');
+        var ol = target.next()[0];
         target.replaceWith(_this.children('img').clone());
+        ol.innerText = name + ' (' + film + ')';
         target.removeClass('picked');
         head.addClass('picked');
       }

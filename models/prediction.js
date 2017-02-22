@@ -5,21 +5,23 @@ var db = require('../database'),
 exports.preds = function(uid, done) {
 
   // horrible convoluted query and subquery to get predictions :-(
-  var sql = 'SELECT N.image, N.film, N.id AS nid, N.name AS nominee, C.weight, C.id AS cid, C.name AS category, (I.nominee_id > 0) AS pred FROM nominees N JOIN categories C ON N.category_id = C.id LEFT JOIN (SELECT category_id, nominee_id FROM predictions P WHERE user_id = ?) I ON (I.category_id = C.id AND I.nominee_id = N.id) ORDER BY cid, nid';
-  db.use().query(sql, uid, function(err, rows) {
+  var sql = 'SELECT N.image, N.film, N.id AS nid, N.name AS nominee, C.lastyear AS ly, C.class AS class, C.weight, C.id AS cid, C.name AS category, (I.nominee_id > 0) AS pred FROM nominees N JOIN categories C ON N.category_id = C.id LEFT JOIN (SELECT category_id, nominee_id FROM predictions P WHERE user_id = ?) I ON (I.category_id = C.id AND I.nominee_id = N.id) ORDER BY cid, nid';
+  db.use().query(sql, uid, (err, rows) => {
 
     if (err) {
       console.log(err);
       done(err);
     } else {
-      var data = [];
-      var pcid = 0;
+      var data = [],
+          pcid = 0;
       for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
         if (row.cid != pcid) {
           data[row.cid - 1] = {
             id: row.cid,
             category: row.category,
+            lastyear: row.ly,
+            class: row.class,
             weight: row.weight,
             pred: {},
             noms: []
@@ -130,14 +132,16 @@ exports.setwinner = function(data, done) {
 exports.results = function(done) {
 
   var sql = 'SELECT username AS player, SUM((winner_id = nominee_id) * weight) AS score FROM predictions P INNER JOIN categories C ON C.id = P.category_id INNER JOIN users U ON U.id = P.user_id GROUP BY username ORDER BY 2 DESC';
-  db.use().query(sql, function(err, rows) {
+  db.use().query(sql, (err, rows) => {
     var result = { error: null, data: null };
     if (err) {
       result.error = err;
     } else {
       result.data = rows;
       // loop through rows, assigning a rank
-      var prev_score = 0, rank = 1, row = 0;
+      var prev_score = 0, 
+          rank = 1, 
+          row = 0;
       for (var i = 0; i < rows.length; i++) {
         if (rows[i].score == prev_score) {
           row++;

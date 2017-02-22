@@ -1,33 +1,17 @@
-<div class="small-12 medium-6 columns">
+<div class="columns">
 
-  <p>Sign up to get a code, which will be your unique ID. Pick a winner for each of the 24 categories to be awarded on Feb 26 (honorary/technical awards etc. don't count). Feel free to pass the link on - the more the merrier.</p>
-  <p>Each category is worth 2,3 or 4 points, depending on its 'popularity'* and number of nominees. The maximum score you can achieve is 70. </p>
-  <p>The player with the best score wins&hellip;nothing really. No money, no statuette, just the satisfaction of knowing you knew more and/or guessed better than everyone else.</p>
-  <p><small>* - totally arbitrary measure, based in part on how well people predicted that category for the past two years.</small></p>
-  
+  <h3>Predict the Academy Award Winners</h3>
+  <h4>How it works</h4>
+  <ol>
+    <li>Sign up below to get a unique code</li>
+    <li>Go to your predictions page (http://oscars.mantonbradbury.com/player/<em>CODE</em>)</li>
+    <li>Pick a winner for each of the 24 categories by the deadline of Midday GMT {{ deadline }}</li>
+    <li>Technical awards don't count, only those awarded at the main ceremony</li>
+    <li>Each category is worth 2,3 or 4 points depending on number of nominees and 'popularity'</li>
+    <li>The player with the most points after all awards have been given out wins</li>
+  </ol>
 </div>
-<div class="small-12 medium-6 columns">
-  <div id="signup">
-    <h4>Sign up</h4>
-    {{#if expired }}
-    <p class="callout alert" style="border-radius: 4px">The deadline for predictions has now expired. See the <a href="/results">results</a> page to see how you did.</p>
-    {{else}}
-    <p>Enter a username and email to get started. The deadline for entering or changing predictions is <strong>midday GMT on Feb 28</strong>.</p>
-    <form method="post" action="/signup">
-      <div class="signup-container">
-        <label for="username">What's your name? <span class="sub-label">(3-25 chars) This is how you'll appear on the leaderboard</span></label>
-        <input autocomplete="off" placeholder="e.g. {{ signups.uid }}" id="username" name="username" type="text" maxlength="25">
-        <span id="username-not-valid" class="intrainput"></span>
-      </div>
-      <div class="signup-container">
-        <label for="email">What's your email? <span class="sub-label">You'll get two emails in total, your signup code and final scores</span></label>
-        <input autocomplete="off" placeholder="e.g. {{ signups.email }}" id="email" name="email" type="email">
-        <span id="email-not-valid" class="intrainput"></span>
-      </div>
-      <input id="signup-submit" type="submit" class="button" value="Sign up" />
-    </form>
-    {{/if }}
-  </div>
+<div class="columns">
+  {{>signup }}
 </div>
-<div class="small-10 columns"></div>
 

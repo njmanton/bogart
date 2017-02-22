@@ -14,7 +14,7 @@
   {{/if }}
   
   <div id="head" data-uid="{{ user.id }}"></div>
-  
+
   <section class="row titles">
     {{#each data }}
     <div class="category">
@@ -26,20 +26,23 @@
         {{#if this.pred.image }}
         <div class="poster">
           <img class="pick-img" title="{{ this.pred.name }}{{#if this.pred.film }} &#10;({{ this.pred.film }}){{/if }}" src="/img/{{ this.pred.image }}.jpg" alt="{{ this.pred.name }} poster">
+          <span class="overlay {{#unless this.class }}hide{{/unless }}">{{ this.pred.name }} <br />({{ this.pred.film }})</span>
         </div>
         {{ else }}
         <div class="poster">
           <img class="pick-img" src="" alt="">
+          <span class="overlay hide"></span>
         </div>
         {{/if }}
       </a>
       {{#unless ../expired }}
-      <div data-cat="{{ this.id }}" id="cat{{ this.id }}" class="noms reveal large" data-reveal data-animation-in="hinge-in-from-top" data-animation-out="hinge-out-from-top">
-        <h4>Best {{ this.category }} - {{ this.weight }} points</h4>
+      <div {{#if this.class }}data-person{{/if }} data-cat="{{ this.id }}" id="cat{{ this.id }}" class="noms reveal large" data-reveal data-animation-in="hinge-in-from-top" data-animation-out="hinge-out-from-top">
+        <h4>Best {{ this.category }} - {{ this.weight }} points (2016 winner: {{ this.lastyear }})</h4>
         {{#each this.noms }}
-        <div data-close class="rev-nom" data-nom="{{ this.id }}">
+        <div data-close class="rev-nom" data-nom="{{ this.id }}" data-name="{{ this.name }}" data-film="{{ this.film }}">
           <img class="{{#if this.pred }}picked{{/if}}" src="/img/{{ this.image }}.jpg" title="{{ this.name }}{{#if this.film }} &#10;({{ this.film }}){{/if }}" alt="{{ this.name }} poster">
           <div class="rev-title">{{ this.name }}</div>
+          <span class="overlay {{#unless this.class }}hide{{/unless }}">{{ this.pred.name }} <br />({{ this.pred.film }})</span>
         </div>
         {{/each }}
       </div>
