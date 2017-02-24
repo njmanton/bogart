@@ -84,7 +84,31 @@ exports.category = function(cat, done) {
       done(rows);
     }
   })
-}
+};
+
+// retrieves the categories without a winner for CLI
+exports.categories = done => {
+  let sql = 'SELECT id AS value, name FROM categories WHERE winner_id IS NULL';
+  db.use().query(sql, (err, rows) => {
+    if (err) {
+      done(err);
+    } else {
+      done(rows);
+    }
+  })
+};
+
+// retrieves the nominees for a given category
+exports.nominees = (cat, done) => {
+  let sql = 'SELECT N.id AS value, N.name FROM nominees N WHERE category_id = ?';
+  db.use().query(sql, cat, (err, rows) => {
+    if (err) {
+      done(err);
+    } else {
+      done(rows);
+    }
+  })
+};
 
 // gets the winner of a category
 exports.getwinner = function(cat, done) {
