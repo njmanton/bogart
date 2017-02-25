@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*********************************************************
 setw.js
 
@@ -5,13 +7,14 @@ command line tool to set winners of categories
 
 *********************************************************/
 
-var db = require('./database'),
-    inq = require('inquirer');
-    pred = require('./models/prediction'),
-    config = require('./config/config');
+var db      =  require('./database'),
+    inq     =  require('inquirer'),
+    chalk   =  require('chalk'),
+    pred    =  require('./models/prediction'),
+    config  =  require('./config/config');
 
 if (!config.expired) {
-  console.log('wait until deadline');
+  console.log(chalk.bold.red('Results cannot be entered before the deadline has been reached!'));
   process.exit(1);
 }
 
