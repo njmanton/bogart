@@ -249,6 +249,20 @@ table tbody tr:nth-child(even) {
   }
 }
 
+.placeholder {
+  height: 317px;
+  width: 214px;
+  background-color: #AAA;
+  color: #444;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 1.4em;
+  p:first-of-type {
+    font-size: 4em;
+  }
+}
+
 .rev-nom img {
   border: 6px solid transparent;
 }

@@ -155,7 +155,7 @@ exports.setwinner = function(data, done) {
 
 exports.results = function(done) {
 
-  var sql = 'SELECT username AS player, SUM((winner_id = nominee_id) * weight) AS score FROM predictions P INNER JOIN categories C ON C.id = P.category_id INNER JOIN users U ON U.id = P.user_id GROUP BY username ORDER BY 2 DESC';
+  var sql = 'SELECT username AS player, code, SUM((winner_id = nominee_id) * weight) AS score FROM predictions P INNER JOIN categories C ON C.id = P.category_id INNER JOIN users U ON U.id = P.user_id GROUP BY username ORDER BY 2 DESC';
   db.use().query(sql, (err, rows) => {
     var result = { error: null, data: null };
     if (err) {
